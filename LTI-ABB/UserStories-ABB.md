@@ -510,6 +510,7 @@ La programación de entrevistas se integra con calendarios externos pero no incl
 ---
 
 ## Estimación del Backlog de Producto
+*(Prompt: Estima por cada item en el backlog: Impacto en el usuario y valor del negocio. Urgencia basada en tendencias del mercado y feedback de usuarios. Complejidad y esfuerzo estimado de implementación. Riesgos y dependencias entre tareas.)*
 
 | User Story | Impacto en Usuario | Valor de Negocio | Urgencia | Complejidad | Esfuerzo (días) | Riesgos | Dependencias |
 |------------|-------------------|------------------|----------|-------------|-----------------|---------|--------------|
@@ -572,3 +573,349 @@ La programación de entrevistas se integra con calendarios externos pero no incl
 **Fase 4 - Escalabilidad (Sprint 7-8):**
 - US8: Publicación Multi-canal
 - US10: Reportes y Analytics
+
+---
+
+## Desglose Técnico del Backlog de Desarrollo
+*(Prompt: Actúa como un Tech Lead senior. A partir de las 10 User Stories del Sistema de Reclutamiento LTI, genera un backlog de tareas técnicas desglosando cada User Story en subtareas específicas de desarrollo. Para cada User Story, incluye: Tareas de Backend (endpoints, modelos, lógica de negocio), Tareas de Frontend (componentes, pantallas, validaciones), Tareas de Base de Datos (tablas, índices, migraciones), Tareas de Integración (APIs externas, servicios), Tareas de Testing (unit tests, integration tests). Prioriza las tareas siguiendo el roadmap por fases.)*
+
+### FASE 1 - MVP (Sprint 1-2)
+
+#### US1: Creación de Ofertas de Empleo
+├── Backend: [16 horas]
+│   ├── POST /api/ofertas - Crear oferta (4h)
+│   ├── GET /api/ofertas - Listar ofertas (2h)
+│   ├── GET /api/ofertas/:id - Obtener oferta (2h)
+│   ├── PUT /api/ofertas/:id - Actualizar oferta (4h)
+│   ├── DELETE /api/ofertas/:id - Desactivar oferta (2h)
+│   └── Validación de campos y sanitización HTML (2h)
+├── Frontend: [12 horas]
+│   ├── Formulario de creación de oferta (4h)
+│   ├── Lista de ofertas con filtros (3h)
+│   ├── Vista detalle de oferta (2h)
+│   ├── Modal de edición de oferta (2h)
+│   └── Validaciones en tiempo real (1h)
+├── Database: [6 horas]
+│   ├── Crear tabla ofertas (2h)
+│   ├── Crear índices en estado, empresa_id (2h)
+│   ├── Migration script (1h)
+│   └── Seed data para testing (1h)
+├── Integrations: [0 horas]
+│   └── Sin integraciones externas
+└── Testing: [8 horas]
+    ├── Unit tests de endpoints (3h)
+    ├── Integration tests de CRUD (3h)
+    └── E2E tests de flujo creación (2h)
+
+**Total US1: 42 horas**
+
+---
+
+#### US2: Registro y Perfil de Candidato
+├── Backend: [20 horas]
+│   ├── POST /api/auth/register - Registro usuario (4h)
+│   ├── POST /api/auth/login - Login con JWT (3h)
+│   ├── POST /api/auth/2fa/setup - Configurar 2FA (4h)
+│   ├── POST /api/auth/2fa/verify - Verificar 2FA (3h)
+│   ├── GET /api/usuarios/perfil - Obtener perfil (2h)
+│   ├── PUT /api/usuarios/perfil - Actualizar perfil (3h)
+│   └── Middleware de autenticación JWT (1h)
+├── Frontend: [16 horas]
+│   ├── Formulario de registro multi-paso (5h)
+│   ├── Pantalla de login (3h)
+│   ├── Configuración 2FA (QR code) (4h)
+│   ├── Formulario de edición de perfil (3h)
+│   └── Indicador de completitud de perfil (1h)
+├── Database: [8 horas]
+│   ├── Crear tabla usuarios (3h)
+│   ├── Crear tabla perfiles (2h)
+│   ├── Índices en email, rol (2h)
+│   └── Migration script (1h)
+├── Integrations: [4 horas]
+│   ├── Integración servicio 2FA (TOTP) (3h)
+│   └── Servicio de envío SMS 2FA (1h)
+└── Testing: [10 horas]
+    ├── Unit tests de auth (4h)
+    ├── Integration tests de 2FA (3h)
+    └── E2E tests de registro (3h)
+
+**Total US2: 58 horas**
+
+---
+
+#### US3: Postulación a Ofertas
+├── Backend: [18 horas]
+│   ├── POST /api/candidaturas - Crear candidatura (4h)
+│   ├── GET /api/candidaturas - Listar candidaturas (2h)
+│   ├── POST /api/candidaturas/upload - Cargar CV (4h)
+│   ├── Integración antivirus ClamAV (3h)
+│   ├── Validación de duplicados (2h)
+│   └── Verificación estado oferta activa (1h)
+├── Frontend: [14 horas]
+│   ├── Formulario de postulación (4h)
+│   ├── Componente de carga de archivos (3h)
+│   ├── Vista previa de CV (2h)
+│   ├── Lista de candidaturas del usuario (3h)
+│   └── Pantalla de confirmación (2h)
+├── Database: [8 horas]
+│   ├── Crear tabla candidaturas (3h)
+│   ├── Crear tabla documentos (2h)
+│   ├── Índices en usuario_id, oferta_id (2h)
+│   └── Migration script (1h)
+├── Integrations: [8 horas]
+│   ├── Integración AWS S3/Cloud Storage (4h)
+│   ├── Integración servicio antivirus (3h)
+│   └── Configuración CDN para archivos (1h)
+└── Testing: [10 horas]
+    ├── Unit tests de carga archivos (3h)
+    ├── Integration tests antivirus (3h)
+    └── E2E tests de postulación (4h)
+
+**Total US3: 58 horas**
+
+---
+
+#### US7: Búsqueda y Filtrado de Candidatos
+├── Backend: [16 horas]
+│   ├── GET /api/candidaturas/buscar - Búsqueda avanzada (5h)
+│   ├── POST /api/candidaturas/filtros - Guardar filtros (3h)
+│   ├── GET /api/candidaturas/filtros - Listar filtros guardados (2h)
+│   ├── GET /api/candidaturas/exportar - Exportar CSV (3h)
+│   └── Implementación Elasticsearch o full-text search (3h)
+├── Frontend: [14 horas]
+│   ├── Componente de búsqueda con filtros (5h)
+│   ├── Panel de filtros dinámicos (3h)
+│   ├── Lista de resultados con paginación (3h)
+│   ├── Sistema de guardado de filtros (2h)
+│   └── Botón de exportación CSV (1h)
+├── Database: [10 horas]
+│   ├── Configurar Elasticsearch (4h)
+│   ├── Crear índices en habilidades, experiencia (3h)
+│   ├── Optimizar queries de búsqueda (2h)
+│   └── Migration script (1h)
+├── Integrations: [4 horas]
+│   ├── Configuración Elasticsearch (3h)
+│   └── Servicio de generación CSV (1h)
+└── Testing: [8 horas]
+    ├── Unit tests de búsqueda (3h)
+    ├── Integration tests de filtros (3h)
+    └── E2E tests de exportación (2h)
+
+**Total US7: 52 horas**
+
+---
+
+### FASE 2 - Core del Sistema (Sprint 3-4)
+
+#### US4: Pipeline Visual de Candidatos
+├── Backend: [20 horas]
+│   ├── GET /api/pipeline - Obtener pipeline (3h)
+│   ├── PUT /api/candidaturas/:id/estado - Cambiar estado (5h)
+│   ├── POST /api/candidaturas/:id/rechazar - Rechazar candidato (3h)
+│   ├── GET /api/candidaturas/auditoria - Historial de cambios (3h)
+│   ├── Lógica de transición automática (4h)
+│   └── WebSocket para actualizaciones en tiempo real (2h)
+├── Frontend: [18 horas]
+│   ├── Componente Kanban con drag-and-drop (6h)
+│   ├── Columnas por estado del pipeline (3h)
+│   ├── Tarjetas de candidatos (3h)
+│   ├── Filtros por oferta de empleo (2h)
+│   ├── Contadores por estado (2h)
+│   └── Modal de rechazo con feedback (2h)
+├── Database: [10 horas]
+│   ├── Crear tabla auditoria_candidaturas (3h)
+│   ├── Triggers para logging de cambios (3h)
+│   ├── Índices en estado, fecha_cambio (3h)
+│   └── Migration script (1h)
+├── Integrations: [6 horas]
+│   ├── Configuración Socket.io/SignalR (4h)
+│   └── Manejo de conexiones WebSocket (2h)
+└── Testing: [12 horas]
+    ├── Unit tests de transiciones (4h)
+    ├── Integration tests de WebSocket (3h)
+    └── E2E tests de pipeline (5h)
+
+**Total US4: 66 horas**
+
+---
+
+#### US9: Notificaciones Automáticas
+├── Backend: [14 horas]
+│   ├── POST /api/notificaciones/enviar - Enviar notificación (3h)
+│   ├── GET /api/notificaciones - Listar notificaciones (2h)
+│   ├── PUT /api/notificaciones/preferencias - Configurar preferencias (3h)
+│   ├── Sistema de eventos para cambios de estado (4h)
+│   └── Cola de envío asíncrono (2h)
+├── Frontend: [10 horas]
+│   ├── Centro de notificaciones (3h)
+│   ├── Panel de configuración de preferencias (3h)
+│   ├── Badges de notificaciones no leídas (2h)
+│   └── Historial de notificaciones (2h)
+├── Database: [6 horas]
+│   ├── Crear tabla notificaciones (2h)
+│   ├── Crear tabla preferencias_notificaciones (2h)
+│   └── Migration script (2h)
+├── Integrations: [8 horas]
+│   ├── Integración SendGrid/Mailgun (4h)
+│   ├── Sistema de templates de email (3h)
+│   └── Configuración Firebase FCM (opcional) (1h)
+└── Testing: [8 horas]
+    ├── Unit tests de envío de emails (3h)
+    ├── Integration tests de colas (3h)
+    └── E2E tests de notificaciones (2h)
+
+**Total US9: 46 horas**
+
+---
+
+### FASE 3 - Evaluación (Sprint 5-6)
+
+#### US5: Asignación de Pruebas Técnicas
+├── Backend: [18 horas]
+│   ├── POST /api/pruebas - Crear prueba (4h)
+│   ├── GET /api/pruebas - Listar biblioteca de pruebas (2h)
+│   ├── POST /api/pruebas/asignar - Asignar a candidato (4h)
+│   ├── GET /api/pruebas/:id/completar - Completar prueba (3h)
+│   ├── Sistema de timer configurable (3h)
+│   └── Cálculo automático de resultados (2h)
+├── Frontend: [16 horas]
+│   ├── Formulario de creación de pruebas (4h)
+│   ├── Biblioteca de pruebas (3h)
+│   ├── Interfaz de toma de prueba para candidato (5h)
+│   ├── Vista de resultados para reclutador (3h)
+│   └── Timer visual con countdown (1h)
+├── Database: [10 horas]
+│   ├── Crear tabla pruebas (3h)
+│   ├── Crear tabla asignaciones_pruebas (3h)
+│   ├── Índices en prueba_id, candidatura_id (3h)
+│   └── Migration script (1h)
+├── Integrations: [4 horas]
+│   ├── Sistema de eventos para notificaciones (2h)
+│   └── Servicio de evaluación automática (2h)
+└── Testing: [10 horas]
+    ├── Unit tests de lógica de pruebas (4h)
+    ├── Integration tests de timer (3h)
+    └── E2E tests de flujo de prueba (3h)
+
+**Total US5: 58 horas**
+
+---
+
+#### US6: Programación de Entrevistas
+├── Backend: [20 horas]
+│   ├── POST /api/entrevistas - Programar entrevista (5h)
+│   ├── GET /api/entrevistas - Listar entrevistas (2h)
+│   ├── PUT /api/entrevistas/:id/feedback - Registrar feedback (4h)
+│   ├── Integración Google Calendar API (4h)
+│   ├── Integración Microsoft Graph API (4h)
+│   └── Validación de conflictos de horarios (1h)
+├── Frontend: [16 horas]
+│   ├── Calendario con disponibilidad (5h)
+│   ├── Formulario de programación (3h)
+│   ├── Integración con calendarios externos (3h)
+│   ├── Formulario de feedback post-entrevista (3h)
+│   └── Vista de agenda de entrevistas (2h)
+├── Database: [8 horas]
+│   ├── Crear tabla entrevistas (3h)
+│   ├── Crear tabla sincronizaciones_calendario (3h)
+│   └── Migration script (2h)
+├── Integrations: [12 horas]
+│   ├── Google Calendar API setup (4h)
+│   ├── Microsoft Graph API setup (4h)
+│   ├── Sincronización bidireccional (3h)
+│   └── Manejo de tokens OAuth (1h)
+└── Testing: [12 horas]
+    ├── Unit tests de programación (4h)
+    ├── Integration tests de calendarios (4h)
+    └── E2E tests de flujo de entrevista (4h)
+
+**Total US6: 68 horas**
+
+---
+
+### FASE 4 - Escalabilidad (Sprint 7-8)
+
+#### US8: Publicación Multi-canal de Ofertas
+├── Backend: [24 horas]
+│   ├── POST /api/publicaciones - Publicar oferta (5h)
+│   ├── GET /api/publicaciones - Listar publicaciones (2h)
+│   ├── PUT /api/publicaciones/:id - Reintentar publicación (3h)
+│   ├── Integración LinkedIn Share API (5h)
+│   ├── Integración Twitter/X API (4h)
+│   ├── Integración Facebook Graph API (4h)
+│   └── Sistema de colas para publicaciones asíncronas (1h)
+├── Frontend: [14 horas]
+│   ├── Selector de canales de publicación (4h)
+│   ├── Vista de estado de publicaciones (3h)
+│   ├── Panel de configuración de APIs (3h)
+│   ├── Historial de publicaciones (2h)
+│   └── Indicadores de éxito/error (2h)
+├── Database: [8 horas]
+│   ├── Crear tabla publicaciones (3h)
+│   ├── Crear tabla configuraciones_canales (3h)
+│   └── Migration script (2h)
+├── Integrations: [20 horas]
+│   ├── LinkedIn API OAuth y setup (5h)
+│   ├── Twitter/X API OAuth y setup (5h)
+│   ├── Facebook API OAuth y setup (5h)
+│   ├── Sistema de webhooks para confirmaciones (3h)
+│   └── Mecanismo de reintentos automáticos (2h)
+└── Testing: [14 horas]
+    ├── Unit tests de APIs de redes sociales (5h)
+    ├── Integration tests de colas (4h)
+    └── E2E tests de publicación multi-canal (5h)
+
+**Total US8: 80 horas**
+
+---
+
+#### US10: Reportes y Analytics
+├── Backend: [22 horas]
+│   ├── GET /api/analytics/metricas - Obtener KPIs (5h)
+│   ├── GET /api/analytics/tiempo-contratación - Tiempo promedio (3h)
+│   ├── GET /api/analytics/conversion - Tasa conversión (3h)
+│   ├── GET /api/analytics/fuentes - Fuentes efectivas (3h)
+│   ├── POST /api/analytics/exportar-pdf - Generar PDF (4h)
+│   ├── POST /api/analytics/exportar-csv - Generar CSV (2h)
+│   └── Vistas materializadas para métricas (2h)
+├── Frontend: [18 horas]
+│   ├── Dashboard principal con KPIs (5h)
+│   ├── Gráficos de tiempo de contratación (3h)
+│   ├── Gráficos de conversión por etapa (3h)
+│   ├── Gráficos de fuentes de reclutamiento (3h)
+│   ├── Filtros por periodo y oferta (2h)
+│   └── Componentes de exportación (2h)
+├── Database: [12 horas]
+│   ├── Crear vistas materializadas (4h)
+│   ├── Optimizar queries agregadas (4h)
+│   ├── Configurar Redis para cache (3h)
+│   └── Migration script (1h)
+├── Integrations: [8 horas]
+│   ├── Integración Chart.js/D3.js (3h)
+│   ├── Servicio de generación PDF (Puppeteer) (3h)
+│   └── Configuración Redis cache (2h)
+└── Testing: [12 horas]
+    ├── Unit tests de cálculo de métricas (4h)
+    ├── Integration tests de cache (3h)
+    └── E2E tests de dashboard (5h)
+
+**Total US10: 72 horas**
+
+---
+
+## Resumen de Esfuerzo Total por Fase
+
+| Fase | User Stories | Horas Totales | Días (8h/día) | Sprint (2 semanas) |
+|------|--------------|---------------|---------------|-------------------|
+| **Fase 1 - MVP** | US1, US2, US3, US7 | 210 horas | 26 días | 2-3 sprints |
+| **Fase 2 - Core** | US4, US9 | 112 horas | 14 días | 1-2 sprints |
+| **Fase 3 - Evaluación** | US5, US6 | 126 horas | 16 días | 2 sprints |
+| **Fase 4 - Escalabilidad** | US8, US10 | 152 horas | 19 días | 2-3 sprints |
+| **TOTAL** | 10 US | 600 horas | 75 días | 7-10 sprints |
+
+### Notas de Estimación
+
+- **Horas por desarrollador:** Considerando 1 desarrollador full-stack trabajando 8 horas/día
+- **Buffer de contingencia:** Se recomienda agregar 20% adicional por imprevistos
+- **Equipo recomendado:** 2-3 desarrolladores para completar en 4-5 meses
+- **Tiempo total estimado:** 75 días + 20% buffer = 90 días (aprox. 4.5 meses con equipo de 2-3 devs)

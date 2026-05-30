@@ -87,3 +87,21 @@ Agregada tabla de estimación del backlog con 10 user stories evaluadas por:
 Incluí leyenda de evaluación y recomendación de roadmap por 4 fases (MVP, Core, Evaluación, Escalabilidad).
 
 ---
+
+## Prompt - 2026-05-30 11:28:38
+
+### Prompt
+Añade una seccion adicional de Estimación del Backlog de Producto siguiendo el siguiente prompt: Actúa como un Tech Lead senior. A partir de las 10 User Stories del Sistema de Reclutamiento LTI (incluidas en el documento), genera un backlog de tareas técnicas desglosando cada User Story en subtareas específicas de desarrollo. Para cada User Story, incluye: Tareas de Backend (endpoints, modelos, lógica de negocio), Tareas de Frontend (componentes, pantallas, validaciones), Tareas de Base de Datos (tablas, índices, migraciones), Tareas de Integración (APIs externas, servicios), Tareas de Testing (unit tests, integration tests). Formato de salida: US[X]: [Título] ├── Backend: [lista de tareas con estimación en horas] ├── Frontend: [lista de tareas con estimación en horas] ├── Database: [lista de tareas con estimación en horas] ├── Integrations: [lista de tareas con estimación en horas] └── Testing: [lista de tareas con estimación en horas]. Prioriza las tareas siguiendo el roadmap por fases indicado en el documento (Fase 1 MVP, Fase 2 Core, etc.).
+
+### Response
+Agregada sección de desglose técnico del backlog con las 10 User Stories desglosadas en subtareas:
+
+- **Backend:** Endpoints, modelos, lógica de negocio con estimación en horas
+- **Frontend:** Componentes, pantallas, validaciones con estimación en horas
+- **Database:** Tablas, índices, migraciones con estimación en horas
+- **Integrations:** APIs externas, servicios con estimación en horas
+- **Testing:** Unit tests, integration tests, E2E tests con estimación en horas
+
+Organizado por fases del roadmap (MVP, Core, Evaluación, Escalabilidad). Total estimado: 600 horas (75 días) para 1 desarrollador, o 4-5 meses con equipo de 2-3 devs incluyendo 20% buffer.
+
+---
