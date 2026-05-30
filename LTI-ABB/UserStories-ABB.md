@@ -506,3 +506,69 @@ La programación de entrevistas se integra con calendarios externos pero no incl
 | Colaboración entre reclutadores | Media | Alta | Alto | US4 |
 | Soporte multi-formato archivos | Media | Baja | Medio | US3 |
 | Videoconferencia integrada | Alta | Alta | Muy alto | US6 |
+
+---
+
+## Estimación del Backlog de Producto
+
+| User Story | Impacto en Usuario | Valor de Negocio | Urgencia | Complejidad | Esfuerzo (días) | Riesgos | Dependencias |
+|------------|-------------------|------------------|----------|-------------|-----------------|---------|--------------|
+| **US1: Creación de Ofertas** | Alta - Permite a reclutadores publicar vacantes | Crítico - Sin ofertas no hay proceso | Alta - Funcionalidad core | Baja - CRUD básico | 2-3 | Bajo - Validaciones estándar | Ninguna |
+| **US2: Registro de Candidato** | Alta - Permite a candidatos participar | Crítico - Sin candidatos no hay proceso | Alta - Funcionalidad core | Media - 2FA, validaciones | 2-3 | Medio - Seguridad, RGPD | Ninguna |
+| **US3: Postulación a Ofertas** | Muy Alta - Acción principal del candidato | Crítico - Core del sistema | Alta - Funcionalidad core | Media - Carga archivos, antivirus | 3-4 | Medio - Integración antivirus, S3 | US1, US2 |
+| **US4: Pipeline Visual** | Muy Alta - Herramienta principal reclutador | Alto - Mejora eficiencia 50% | Alta - Diferenciador clave | Media - Kanban, WebSockets | 3-4 | Medio - Tiempo real, auditoría | US3 |
+| **US5: Pruebas Técnicas** | Alta - Filtrado de habilidades técnicas | Alto - Mejora calidad contrataciones | Media - Valor añadido | Media - Timer, biblioteca tests | 3-4 | Medio - Límites tiempo, notificaciones | US4 |
+| **US6: Programación de Entrevistas** | Alta - Etapa crítica selección | Alto - Necesario para contratación | Media - Estandar del mercado | Alta - Integraciones calendarios | 3-4 | Alto - APIs externas, conflictos | US4, US5 |
+| **US7: Búsqueda y Filtrado** | Muy Alta - Ahorra tiempo significativo | Alto - Eficiencia operativa | Alta - Expectativa básica | Media - Elasticsearch, filtros | 2-3 | Bajo - Motor búsqueda estándar | US2 |
+| **US8: Publicación Multi-canal** | Media - Amplía alcance ofertas | Medio - Reduce costos publicación | Baja - Nice-to-have | Alta - Múltiples APIs, colas | 4-5 | Alto - APIs externas, webhooks | US1 |
+| **US9: Notificaciones Automáticas** | Alta - Mejora experiencia candidato | Medio - Employer branding | Media - Expectativa usuario | Baja - Email service, colas | 2-3 | Bajo - Servicio email estándar | US4 |
+| **US10: Reportes y Analytics** | Media - Toma de decisiones | Medio - Optimización continua | Baja - Valor estratégico | Alta - Dashboard, queries | 4-5 | Medio - Métricas complejas | US4, US6 |
+
+### Leyenda de Evaluación
+
+**Impacto en Usuario:**
+- **Muy Alta:** Funcionalidad esencial sin la cual el sistema no es usable
+- **Alta:** Funcionalidad importante que mejora significativamente la experiencia
+- **Media:** Funcionalidad útil pero no crítica
+- **Baja:** Funcionalidad complementaria
+
+**Valor de Negocio:**
+- **Crítico:** Necesario para el modelo de negocio
+- **Alto:** Impacto directo en KPIs principales (tiempo contratación, calidad)
+- **Medio:** Mejora operativa o branding
+- **Bajo:** Valor estratégico a largo plazo
+
+**Urgencia:**
+- **Alta:** Requerimiento de mercado, expectativa básica del usuario
+- **Media:** Diferenciador competitivo
+- **Baja:** Nice-to-have, puede diferirse
+
+**Complejidad:**
+- **Baja:** Tecnología estándar, sin integraciones complejas
+- **Media:** Algunas integraciones o lógica de negocio moderada
+- **Alta:** Múltiples integraciones externas, lógica compleja
+
+**Riesgos:**
+- **Bajo:** Tecnología probada, dependencias estables
+- **Medio:** Integraciones con servicios externos, requisitos regulatorios
+- **Alto:** APIs de terceros no controladas, coordinación compleja
+
+### Recomendación de Roadmap por Fases
+
+**Fase 1 - MVP (Sprint 1-2):**
+- US1: Creación de Ofertas
+- US2: Registro de Candidato
+- US3: Postulación a Ofertas
+- US7: Búsqueda y Filtrado
+
+**Fase 2 - Core del Sistema (Sprint 3-4):**
+- US4: Pipeline Visual
+- US9: Notificaciones Automáticas
+
+**Fase 3 - Evaluación (Sprint 5-6):**
+- US5: Pruebas Técnicas
+- US6: Programación de Entrevistas
+
+**Fase 4 - Escalabilidad (Sprint 7-8):**
+- US8: Publicación Multi-canal
+- US10: Reportes y Analytics
