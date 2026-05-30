@@ -1416,3 +1416,8 @@ La programación de entrevistas se integra con calendarios externos pero no incl
 - Spike 1: APIs Redes Sociales
 - US8a-d: Publicación Multi-canal
 - US10: Reportes y Analytics
+
+--
+## Backlog exercise conclusion
+
+El backlog Tech Lead Senior seria el backlog elegido en mi caso dado que se puede proporcionar a negocio como documento de referencia. Procederiamos a incorporar elementos de los otros dos backlog generados para terminar de completar un backlog robusto y que pueda contemplar los requisitos de calidad, seguridad, performance y escalabilidad.
