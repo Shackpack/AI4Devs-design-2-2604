@@ -105,3 +105,20 @@ Agregada sección de desglose técnico del backlog con las 10 User Stories desgl
 Organizado por fases del roadmap (MVP, Core, Evaluación, Escalabilidad). Total estimado: 600 horas (75 días) para 1 desarrollador, o 4-5 meses con equipo de 2-3 devs incluyendo 20% buffer.
 
 ---
+
+## Prompt - 2026-05-30 11:34:02
+
+### Prompt
+Añade una seccion adicional de Estimación del Backlog de Producto siguiendo el siguiente prompt: Actúa como un Product Owner experto en metodologías ágiles. Basándote en las 10 User Stories existentes del Sistema de Reclutamiento LTI y en la sección 'Análisis de Problemas Comunes y Mejoras Propuestas', genera: 1. User Stories adicionales para cubrir las 5 mejoras propuestas. 2. Refinamiento de las US existentes que no cumplan perfectamente el criterio INVEST. 3. Definition of Done (DoD) específica para cada tipo de User Story. 4. Spike stories para las áreas de mayor incertidumbre técnica.
+
+### Response
+Agregada sección 'Refinamiento del Backlog - Product Owner' con:
+
+1. **5 User Stories adicionales** (US11-US15): Registro progresivo, Feedback pruebas, Colaboración reclutadores, Multi-formato archivos, Videoconferencia integrada
+2. **Refinamiento de US existentes**: División de US2 (3 sub-US), US4 (3 sub-US), US8 (4 sub-US) para mejor cumplimiento INVEST
+3. **Definition of Done por tipo**: CRUD, Integraciones, UI Compleja, Analytics con checklists específicos
+4. **4 Spike stories**: APIs redes sociales, Elasticsearch, Videoconferencia, Antivirus
+5. **Tabla priorización actualizada**: 22 US totales con dependencias y spikes
+6. **Roadmap actualizado**: Sprint 0 + 5 fases (11 sprints totales, 79-99 días con spikes)
+
+---

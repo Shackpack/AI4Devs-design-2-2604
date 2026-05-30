@@ -919,3 +919,500 @@ La programación de entrevistas se integra con calendarios externos pero no incl
 - **Buffer de contingencia:** Se recomienda agregar 20% adicional por imprevistos
 - **Equipo recomendado:** 2-3 desarrolladores para completar en 4-5 meses
 - **Tiempo total estimado:** 75 días + 20% buffer = 90 días (aprox. 4.5 meses con equipo de 2-3 devs)
+
+---
+
+## Refinamiento del Backlog - Product Owner
+
+*(Prompt: Actúa como un Product Owner experto en metodologías ágiles. Basándote en las 10 User Stories existentes y en la sección "Análisis de Problemas Comunes y Mejoras Propuestas", genera User Stories adicionales, refinamiento de US existentes, Definition of Done y Spike stories.)*
+
+### 1. User Stories Adicionales para Mejoras Propuestas
+
+#### US11: Registro Progresivo de Candidatos
+
+**Como** candidato,
+**quiero** registrarme con información básica (nombre, email, CV) y completar mi perfil gradualmente,
+**para** poder postularme rápidamente sin perder tiempo en formularios largos.
+
+**Criterios de Aceptación:**
+- El candidato puede registrarse con solo: nombre, email, contraseña y CV
+- El sistema muestra indicador de porcentaje de completitud del perfil
+- Se permite postular con perfil mínimo (60% completitud)
+- Campos faltantes se muestran como "recomendados" con prioridad
+- El sistema envía recordamientos para completar perfil
+- Importación opcional desde LinkedIn para completar perfil automáticamente
+
+**Verificación INVEST:**
+- **I (Independent):** Funcionalidad autónoma de registro
+- **N (Negotiable):** Porcentaje mínimo de completitud negociable
+- **V (Valuable):** Reduce barrera de entrada, aumenta conversión
+- **E (Estimable):** Lógica de validación de completitud (2-3 días)
+- **S (Small):** Modificación de flujo de registro existente
+- **T (Testeable):** Validaciones de porcentaje y postulación verificables
+
+---
+
+#### US12: Feedback Estructurado en Pruebas Técnicas
+
+**Como** candidato,
+**quiero** recibir un reporte detallado con mis aciertos, errores y áreas de mejora después de completar una prueba técnica,
+**para** aprender de mis errores y mejorar para futuras oportunidades.
+
+**Criterios de Aceptación:**
+- El sistema genera reporte con aciertos/errores por categoría de habilidad
+- Muestra percentil de desempeño vs otros candidatos (anonimizado)
+- Proporciona recomendaciones de recursos/cursos basados en áreas débiles
+- Permite repetir prueba después de 30 días con nuevas preguntas
+- El reclutador puede ver el reporte completo del candidato
+- El feedback es inmediato tras completar la prueba
+
+**Verificación INVEST:**
+- **I (Independent):** Extensión de US5, lógica autónoma de feedback
+- **N (Negotiable):** Nivel de detalle del feedback negociable
+- **V (Valuable):** Mejora experiencia candidato y employer branding
+- **E (Estimable):** Sistema de análisis y generación de reportes (3-4 días)
+- **S (Small):** Alcance limitado a generación de reportes
+- **T (Testeable):** Exactitud de análisis y generación verificable
+
+---
+
+#### US13: Colaboración entre Reclutadores
+
+**Como** reclutador,
+**quiero** añadir comentarios, etiquetas y asignar candidatos a otros reclutadores del equipo,
+**para** coordinar decisiones y compartir contexto sobre los candidatos.
+
+**Criterios de Aceptación:**
+- Sistema de comentarios con @mención entre reclutadores en cada candidatura
+- Etiquetas personalizadas (ej: "prioridad alta", "referencia interna", "backup")
+- Asignación de reclutador responsable para cada candidatura
+- Vista de equipo mostrando candidatos asignados a cada reclutador
+- Sistema de votación para decisiones de avance/rechazo en equipo
+- Historial de comentarios y cambios de asignación
+
+**Verificación INVEST:**
+- **I (Independent):** Extensión de US4, módulo de colaboración autónomo
+- **N (Negotiable):** Tipos de etiquetas y sistema de votación negociables
+- **V (Valuable):** Mejora coordinación y toma de decisiones en equipo
+- **E (Estimable):** Sistema de comentarios, etiquetas y asignaciones (4-5 días)
+- **S (Small):** Alcance limitado a features de colaboración
+- **T (Testeable):** Funcionalidad de comentarios y asignaciones verificable
+
+---
+
+#### US14: Soporte Multi-formato de Archivos
+
+**Como** candidato,
+**quiero** adjuntar CVs en múltiples formatos (PDF, Word, imágenes) y enlaces a portfolios online (GitHub, Behance, Dribbble),
+**para** mostrar mi trabajo completo independientemente del formato.
+
+**Criterios de Aceptación:**
+- Acepta archivos: PDF, Word, JPG, PNG (máx 25MB)
+- Permite adjuntar enlaces a GitHub, Behance, Dribbble, YouTube, Vimeo
+- Genera vista previa de CVs y portfolios en el sistema
+- Parser inteligente extrae información automáticamente de diferentes formatos
+- Compresión automática de archivos grandes
+- Validación de enlaces externos para asegurar accesibilidad
+
+**Verificación INVEST:**
+- **I (Independent):** Extensión de US3, módulo de archivos autónomo
+- **N (Negotiable):** Formatos específicos y límites de tamaño negociables
+- **V (Valuable):** Permite captar talento creativo/tecnológico
+- **E (Estimable):** Integración parsers, compresión, validación (3-4 días)
+- **S (Small):** Alcance limitado a soporte de formatos
+- **T (Testeable):** Validación de formatos y parsers verificable
+
+---
+
+#### US15: Videoconferencia Integrada
+
+**Como** reclutador,
+**quiero** generar automáticamente enlaces de videollamada (Zoom/Teams/Meet) al programar entrevistas,
+**para** tener una experiencia fluida y profesional sin coordinación manual.
+
+**Criterios de Aceptación:**
+- Integración con APIs de Zoom, Microsoft Teams y Google Meet
+- Generación automática de enlace al programar entrevista
+- Virtual waiting room para candidatos antes de la entrevista
+- Opción de grabar entrevista con consentimiento del candidato
+- Formulario de feedback accesible durante la videollamada
+- Transcripción automática de entrevista para búsqueda posterior
+- Calendario unificado mostrando disponibilidad de todos los entrevistadores
+
+**Verificación INVEST:**
+- **I (Independent):** Extensión de US6, módulo de video autónomo
+- **N (Negotiable):** Plataformas específicas negociables
+- **V (Valuable):** Elimina fricción, mejora experiencia profesional
+- **E (Estimable):** Integraciones complejas con APIs de video (5-6 días)
+- **S (Small):** Alcance limitado a integración de video
+- **T (Testeable):** Generación de enlaces y grabación verificable
+
+---
+
+### 2. Refinamiento de User Stories Existentes
+
+#### US2 - Registro y Perfil de Candidato (División Sugerida)
+
+**Problema:** La US2 actual es demasiado grande (registro + perfil + 2FA) y no cumple perfectamente el criterio "Small".
+
+**División Propuesta:**
+
+**US2a: Registro Básico de Candidato**
+- Registro con nombre, email, contraseña
+- Validación de email
+- Email de confirmación
+
+**US2b: Completitud de Perfil**
+- Formulario de experiencia laboral
+- Formulario de educación
+- Indicador de completitud
+- Actualización de perfil
+
+**US2c: Autenticación 2FA**
+- Configuración de 2FA (TOTP/SMS)
+- Verificación de 2FA
+- Recuperación de cuenta
+
+**Justificación:** Divide una US de 58 horas en 3 US más pequeñas (~20h cada una), mejorando el criterio "Small" y permitiendo entrega incremental.
+
+---
+
+#### US4 - Pipeline Visual de Candidatos (División Sugerida)
+
+**Problema:** La US4 combina UI Kanban + WebSockets + lógica de transición + auditoría, lo que la hace compleja.
+
+**División Propuesta:**
+
+**US4a: Pipeline Visual Básico**
+- Componente Kanban con drag-and-drop
+- Visualización de candidatos por estado
+- Filtros por oferta
+
+**US4b: Transiciones de Estado**
+- API para cambiar estado
+- Lógica de validación de transiciones
+- Rechazo de candidatos
+
+**US4c: Tiempo Real y Auditoría**
+- WebSocket para actualizaciones en vivo
+- Historial de cambios de estado
+- Logging de auditoría
+
+**Justificación:** Permite entregar MVP del pipeline sin tiempo real inicial, reduciendo riesgo y complejidad.
+
+---
+
+#### US8 - Publicación Multi-canal (División Sugerida)
+
+**Problema:** Integra 3 APIs diferentes (LinkedIn, Twitter, Facebook) en una sola US, lo que aumenta riesgo y complejidad.
+
+**División Propuesta:**
+
+**US8a: Publicación en LinkedIn**
+- Integración LinkedIn Share API
+- Publicación de ofertas
+- Tracking de estado
+
+**US8b: Publicación en Twitter/X**
+- Integración Twitter/X API
+- Publicación de ofertas
+- Tracking de estado
+
+**US8c: Publicación en Facebook**
+- Integración Facebook Graph API
+- Publicación de ofertas
+- Tracking de estado
+
+**US8d: Sistema de Colas y Webhooks**
+- Cola para publicaciones asíncronas
+- Webhooks para confirmaciones
+- Sistema de reintentos
+
+**Justificación:** Permite priorizar canales más importantes y reducir riesgo de integraciones múltiples.
+
+---
+
+### 3. Definition of Done (DoD) por Tipo de User Story
+
+#### DoD para User Stories de CRUD (US1, US2a, US2b, US7)
+
+**Criterios Comunes:**
+- [ ] Código implementado en rama feature
+- [ ] Unit tests con cobertura ≥ 80%
+- [ ] Integration tests de endpoints
+- [ ] Validaciones de datos implementadas
+- [ ] Sanitización de inputs contra XSS/SQL injection
+- [ ] API documentada (Swagger/OpenAPI)
+- [ ] Code review aprobado por al menos 1 peer
+- [ ] Migraciones de base de datos ejecutadas
+- [ ] Seed data para entorno de desarrollo
+- [ ] Deployado a entorno de staging
+- [ ] E2E tests pasando en staging
+- [ ] Sin errores de consola en frontend
+- [ ] Performance: respuestas < 200ms para endpoints simples
+
+**Criterios Específicos Backend:**
+- [ ] Endpoints RESTful siguiendo convenciones
+- [ ] Manejo de errores HTTP apropiado (4xx, 5xx)
+- [ ] Logging estructurado implementado
+- [ ] Rate limiting configurado
+
+**Criterios Específicos Frontend:**
+- [ ] Componentes reutilizables
+- [ ] Validaciones en tiempo real
+- [ ] Mensajes de error claros
+- [ ] Responsive design probado
+- [ ] Accesibilidad (WCAG 2.1 AA)
+
+---
+
+#### DoD para User Stories con Integraciones (US3, US6, US8a-d, US9, US15)
+
+**Criterios Comunes:**
+- [ ] Todos los criterios de CRUD aplicables
+- [ ] Documentación de APIs externas consultada
+- [ ] Manejo de errores de APIs externas implementado
+- [ ] Retry logic con backoff exponencial
+- [ ] Timeout configurado para llamadas externas
+- [ ] Circuit breaker pattern implementado
+- [ ] Secrets/credentials en variables de entorno
+- [ ] Tests de integración con mocks de APIs externas
+- [ ] Monitoring de latencia de APIs externas
+- [ ] Alertas configuradas para fallos de integración
+
+**Criterios Específicos OAuth:**
+- [ ] Flujo OAuth implementado correctamente
+- [ ] Refresh tokens gestionados
+- [ ] Revocación de tokens implementada
+- [ ] Scopes mínimos necesarios
+
+**Criterios Específicos Webhooks:**
+- [ ] Validación de firmas de webhooks
+- [ ] Idempotencia en procesamiento de webhooks
+- [ ] Logging de payloads de webhooks
+- [ ] Retry mechanism para webhooks fallidos
+
+---
+
+#### DoD para User Stories de UI Compleja (US4a-c, US5, US11, US13)
+
+**Criterios Comunes:**
+- [ ] Todos los criterios de CRUD aplicables
+- [ ] Design system/component library utilizado
+- [ ] Componentes unit testeados
+- [ ] Storybook para componentes UI
+- [ ] Animaciones/transitiones optimizadas
+- [ ] Lazy loading implementado donde aplica
+- [ ] Optimización de imágenes y assets
+- [ ] Performance: Lighthouse score ≥ 90
+- [ ] Cross-browser testing (Chrome, Firefox, Safari, Edge)
+- [ ] Mobile testing (iOS, Android)
+- [ ] Accesibilidad verificada con axe DevTools
+
+**Criterios Específicos Drag-and-Drop:**
+- [ ] Touch support para móvil
+- [ ] Keyboard navigation implementada
+- [ ] Visual feedback durante drag
+- [ ] Undo/redo para acciones destructivas
+
+**Criterios Específicos Tiempo Real:**
+- [ ] Reconnection logic implementada
+- [ ] Fallback a polling si WebSocket falla
+- [ ] Optimistic UI updates
+- [ ] Conflict resolution para ediciones simultáneas
+
+---
+
+#### DoD para User Stories de Analytics (US10, US12)
+
+**Criterios Comunes:**
+- [ ] Todos los criterios de CRUD aplicables
+- [ ] Queries optimizadas con EXPLAIN ANALYZE
+- [ ] Índices apropiados creados
+- [ ] Vistas materializadas o cache implementado
+- [ ] Validación de datos de métricas
+- [ ] Tests de precisión de cálculos
+- [ ] Performance: dashboard carga < 3s
+- [ ] Exportación de datos funcional
+- [ ] Visualizaciones accesibles (alt text, contrast)
+- [ ] Responsive de gráficos probado
+
+**Criterios Específicos Cache:**
+- [ ] Estrategia de cache invalidation definida
+- [ ] TTL configurado apropiadamente
+- [ ] Cache warming implementado
+- [ ] Monitoring de hit/miss ratio
+
+---
+
+### 4. Spike Stories para Áreas de Incertidumbre Técnica
+
+#### Spike 1: Integración con APIs de Redes Sociales (US8)
+
+**Objetivo:** Investigar viabilidad y complejidad de integración con LinkedIn, Twitter/X y Facebook APIs.
+
+**Actividades:**
+- [ ] Revisar documentación oficial de cada API
+- [ ] Crear cuentas de developer y obtener API keys
+- [ ] Implementar PoC de autenticación OAuth para cada plataforma
+- [ ] Probar endpoints de publicación con datos de prueba
+- [ ] Documentar limitaciones, quotas y restricciones
+- [ ] Evaluar estabilidad y cambios recientes en APIs
+- [ ] Estimar esfuerzo real vs estimación inicial
+- [ ] Identificar riesgos y dependencias
+
+**Resultado Esperado:**
+- Documento técnico con hallazgos
+- Código PoC reusable
+- Estimación refinada para US8a-d
+- Decisión: proceder, modificar alcance o descartar
+
+**Tiempo Estimado:** 3-5 días
+
+---
+
+#### Spike 2: Motor de Búsqueda Elasticsearch (US7)
+
+**Objetivo:** Evaluar Elasticsearch vs full-text search de PostgreSQL para búsqueda de candidatos.
+
+**Actividades:**
+- [ ] Configurar cluster Elasticsearch de prueba
+- [ ] Indexar dataset de muestra de candidatos
+- [ ] Implementar queries de búsqueda complejas (fuzzy, filters, aggregations)
+- [ ] Comparar performance vs PostgreSQL full-text search
+- [ ] Evaluar complejidad de mantenimiento y operaciones
+- [ ] Probar escalabilidad con dataset grande (100k+ registros)
+- [ ] Analizar costos de infraestructura
+- [ ] Documentar pros/contras de cada opción
+
+**Resultado Esperado:**
+- Benchmark de performance
+- Análisis de costos
+- Recomendación técnica
+- Estimación refinada para US7
+
+**Tiempo Estimado:** 3-4 días
+
+---
+
+#### Spike 3: Sistema de Videoconferencia (US15)
+
+**Objetivo:** Investigar opciones de integración de videoconferencia y evaluar viabilidad técnica.
+
+**Actividades:**
+- [ ] Evaluar opciones: Zoom SDK, Microsoft Teams SDK, Google Meet API, Twilio Video
+- [ ] Revisar requisitos de compliance y seguridad
+- [ ] Implementar PoC de integración con opción más prometedora
+- [ ] Probar funcionalidades clave: grabación, transcripción, waiting room
+- [ ] Evaluar costos por usuario/minuto
+- [ ] Analizar requisitos de infraestructura
+- [ ] Probar calidad de video y audio
+- [ ] Documentar limitaciones y requisitos técnicos
+
+**Resultado Esperado:**
+- Matriz de comparación de proveedores
+- PoC funcional
+- Análisis de costos
+- Recomendación de proveedor
+- Estimación refinada para US15
+
+**Tiempo Estimado:** 4-5 días
+
+---
+
+#### Spike 4: Sistema de Antivirus para Archivos (US3)
+
+**Objetivo:** Evaluar opciones de escaneo antivirus para archivos cargados por candidatos.
+
+**Actividades:**
+- [ ] Evaluar opciones: ClamAV on-premise, AWS Virus Scan, Cloud-based services
+- [ ] Implementar PoC de integración con opción seleccionada
+- [ ] Probar rendimiento con diferentes tamaños de archivo
+- [ ] Evaluar costos por escaneo
+- [ ] Analizar latencia en flujo de carga
+- [ ] Documentar falsos positivos y manejo
+- [ ] Evaluar cumplimiento RGPD
+- [ ] Probar escalabilidad con alta concurrencia
+
+**Resultado Esperado:**
+- Comparación de soluciones
+- PoC funcional
+- Análisis de costos y performance
+- Recomendación técnica
+- Estimación refinada para US3
+
+**Tiempo Estimado:** 2-3 días
+
+---
+
+### 5. Tabla de Priorización Actualizada
+
+| User Story | Tipo | Prioridad | Estimación (días) | Dependencias | Spike Requerido |
+|------------|------|-----------|-------------------|--------------|------------------|
+| **US1: Creación de Ofertas** | CRUD | Alta | 2-3 | Ninguna | No |
+| **US2a: Registro Básico** | CRUD | Alta | 2-3 | Ninguna | No |
+| **US2b: Completitud Perfil** | CRUD | Alta | 2-3 | US2a | No |
+| **US2c: Autenticación 2FA** | Integración | Alta | 2-3 | US2a | No |
+| **US3: Postulación a Ofertas** | Integración | Alta | 3-4 | US1, US2a | Spike 4 |
+| **US4a: Pipeline Visual Básico** | UI Compleja | Alta | 2-3 | US3 | No |
+| **US4b: Transiciones de Estado** | CRUD | Alta | 2-3 | US4a | No |
+| **US4c: Tiempo Real y Auditoría** | UI Compleja | Media | 2-3 | US4b | No |
+| **US5: Pruebas Técnicas** | UI Compleja | Media | 3-4 | US4b | No |
+| **US6: Programación de Entrevistas** | Integración | Media | 3-4 | US4b, US5 | No |
+| **US7: Búsqueda y Filtrado** | Analytics | Alta | 2-3 | US2b | Spike 2 |
+| **US8a: Publicación LinkedIn** | Integración | Baja | 2-3 | US1 | Spike 1 |
+| **US8b: Publicación Twitter** | Integración | Baja | 2-3 | US1 | Spike 1 |
+| **US8c: Publicación Facebook** | Integración | Baja | 2-3 | US1 | Spike 1 |
+| **US8d: Colas y Webhooks** | Integración | Baja | 2-3 | US8a-c | Spike 1 |
+| **US9: Notificaciones** | Integración | Media | 2-3 | US4c | No |
+| **US10: Reportes y Analytics** | Analytics | Baja | 4-5 | US4c, US6 | No |
+| **US11: Registro Progresivo** | CRUD | Alta | 2-3 | US2a | No |
+| **US12: Feedback Pruebas** | Analytics | Alta | 3-4 | US5 | No |
+| **US13: Colaboración Reclutadores** | UI Compleja | Media | 4-5 | US4c | No |
+| **US14: Multi-formato Archivos** | Integración | Media | 3-4 | US3 | No |
+| **US15: Videoconferencia** | Integración | Alta | 5-6 | US6 | Spike 3 |
+
+**Total Estimado (sin spikes):** 67-82 días
+**Total Spikes:** 12-17 días
+**Total con Spikes:** 79-99 días
+
+---
+
+### 6. Roadmap Actualizado con Spikes
+
+**Sprint 0 - Investigación (1 semana):**
+- Spike 2: Elasticsearch vs PostgreSQL
+- Spike 4: Sistema de Antivirus
+
+**Fase 1 - MVP Mejorado (Sprint 1-3):**
+- US1: Creación de Ofertas
+- US2a: Registro Básico
+- US2b: Completitud Perfil
+- US2c: Autenticación 2FA
+- US11: Registro Progresivo
+- US3: Postulación a Ofertas
+- US7: Búsqueda y Filtrado
+
+**Fase 2 - Core del Sistema (Sprint 4-5):**
+- US4a: Pipeline Visual Básico
+- US4b: Transiciones de Estado
+- US4c: Tiempo Real y Auditoría
+- US9: Notificaciones
+
+**Fase 3 - Evaluación (Sprint 6-7):**
+- US5: Pruebas Técnicas
+- US12: Feedback Pruebas
+- US6: Programación de Entrevistas
+
+**Sprint 8 - Investigación Video:**
+- Spike 3: Sistema de Videoconferencia
+
+**Fase 4 - Colaboración (Sprint 9):**
+- US13: Colaboración Reclutadores
+- US14: Multi-formato Archivos
+- US15: Videoconferencia
+
+**Fase 5 - Escalabilidad (Sprint 10-11):**
+- Spike 1: APIs Redes Sociales
+- US8a-d: Publicación Multi-canal
+- US10: Reportes y Analytics
