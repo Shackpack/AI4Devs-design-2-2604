@@ -1421,3 +1421,95 @@ La programación de entrevistas se integra con calendarios externos pero no incl
 ## Backlog exercise conclusion
 
 El backlog Tech Lead Senior seria el backlog elegido en mi caso dado que se puede proporcionar a negocio como documento de referencia. Procederiamos a incorporar elementos de los otros dos backlog generados para terminar de completar un backlog robusto y que pueda contemplar los requisitos de calidad, seguridad, performance y escalabilidad.
+
+---
+
+## Anexo: Estimaciones de Esfuerzo por Metodología
+
+Este anexo presenta las estimaciones de las 10 User Stories originales utilizando diferentes metodologías de estimación ágil y unidades de medida.
+
+### Tabla de Conversión de Metodologías
+
+| Horas | Story Points (1 SP = 6h) | Fibonacci | Planning Poker | T-Shirt Sizing |
+|-------|-------------------------|-----------|----------------|----------------|
+| 0-8   | 1                       | 1         | 1              | XS             |
+| 9-16  | 2                       | 2         | 2              | S              |
+| 17-24 | 3                       | 3         | 3              | S              |
+| 25-36 | 5                       | 5         | 5              | M              |
+| 37-48 | 8                       | 8         | 8              | M              |
+| 49-60 | 10                      | 13        | 13             | L              |
+| 61-72 | 12                      | 13        | 13             | L              |
+| 73-84 | 14                      | 21        | 20             | XL             |
+| 85+   | 20+                     | 34        | 40             | XXL            |
+
+### Estimaciones por User Story
+
+| User Story | Descripción | Horas | Story Points | Fibonacci | Planning Poker | T-Shirt |
+|------------|-------------|-------|--------------|-----------|----------------|---------|
+| **US1** | Creación de Ofertas | 42 | 7 | 8 | 8 | M |
+| **US2** | Registro de Candidatos | 58 | 10 | 13 | 13 | L |
+| **US3** | Postulación a Ofertas | 58 | 10 | 13 | 13 | L |
+| **US4** | Pipeline Visual | 66 | 11 | 13 | 13 | L |
+| **US5** | Pruebas Técnicas | 58 | 10 | 13 | 13 | L |
+| **US6** | Programación Entrevistas | 68 | 11 | 13 | 13 | L |
+| **US7** | Búsqueda y Filtrado | 52 | 9 | 8 | 8 | L |
+| **US8** | Publicación Multi-canal | 80 | 13 | 21 | 20 | XL |
+| **US9** | Notificaciones | 46 | 8 | 8 | 8 | M |
+| **US10** | Reportes y Analytics | 72 | 12 | 13 | 13 | L |
+| **TOTAL** | 10 User Stories | 600 | 101 | 113 | 116 | - |
+
+### Análisis Comparativo por Metodología
+
+#### 1. **Story Points (Basado en Horas)**
+- **Base de conversión:** 1 Story Point = 6 horas
+- **Total estimado:** 101 Story Points
+- **Ventaja:** Relación directa con esfuerzo técnico medible
+- **Uso recomendado:** Equipos con historial de velocidad (velocity) estable
+
+#### 2. **Secuencia Fibonacci**
+- **Escala:** 1, 2, 3, 5, 8, 13, 21, 34
+- **Total estimado:** 113 puntos
+- **Ventaja:** Diferencia creciente entre valores reduce precisión falsa
+- **Uso recomendado:** Planning Poker clásico, equipos que prefieren estimación relativa
+
+#### 3. **Planning Poker**
+- **Escala:** 0, 1, 2, 3, 5, 8, 13, 20, 40, 100
+- **Total estimado:** 116 puntos
+- **Ventaja:** Valores intermedios (20, 40) para proyectos grandes
+- **Uso recomendado:** Equipos con proyectos de mayor complejidad
+
+#### 4. **T-Shirt Sizing**
+- **Escala:** XS, S, M, L, XL, XXL
+- **Distribución:**
+  - XS: 0 US
+  - S: 0 US
+  - M: 2 US (US1, US9)
+  - L: 7 US (US2, US3, US4, US5, US6, US7, US10)
+  - XL: 1 US (US8)
+  - XXL: 0 US
+- **Ventaja:** Simplificación extrema para stakeholders no técnicos
+- **Uso recomendado:** Roadmapping de alto nivel, comunicación con negocio
+
+### Velocidad del Equipo (Velocity) por Metodología
+
+Suponiendo un equipo de 2-3 desarrolladores trabajando en sprints de 2 semanas:
+
+| Metodología | Puntos Totales | Sprints (Velocity 20) | Sprints (Velocity 30) | Sprints (Velocity 40) |
+|-------------|----------------|----------------------|----------------------|----------------------|
+| Story Points | 101 | 6 sprints (12 semanas) | 4 sprints (8 semanas) | 3 sprints (6 semanas) |
+| Fibonacci | 113 | 6 sprints (12 semanas) | 4 sprints (8 semanas) | 3 sprints (6 semanas) |
+| Planning Poker | 116 | 6 sprints (12 semanas) | 4 sprints (8 semanas) | 3 sprints (6 semanas) |
+
+### Recomendaciones de Uso
+
+1. **Para planificación técnica:** Usar **Story Points** basados en horas (más preciso)
+2. **Para Planning Poker:** Usar **Fibonacci** (estándar de la industria)
+3. **Para comunicación con negocio:** Usar **T-Shirt Sizing** (más accesible)
+4. **Para proyectos complejos:** Usar **Planning Poker** extendido (incluye 20, 40)
+
+### Notas de Implementación
+
+- **Story Points:** 1 SP = 6 horas es una heurística inicial; ajustar según velocity real del equipo
+- **Fibonacci:** La secuencia exponencial refleja incertidumbre creciente en tareas grandes
+- **T-Shirt:** Convertir a Story Points/Fibonacci para sprint planning detallado
+- **Planning Poker:** Requiere sesión de estimación con todo el equipo presente
