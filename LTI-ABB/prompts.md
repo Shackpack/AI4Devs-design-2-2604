@@ -36,16 +36,34 @@ También actualicé la verificación INVEST para reflejar que incluye lógica de
 
 ---
 
-## Prompt - 2026-05-30 11:02:21
+## Prompt - 2026-05-30 11:15:08
 
 ### Prompt
-en la user story 4, se menciona en los criterios de aceptación que el reclutador es quien mueve entre estados mediante drag-and drop. Este cambio de estado debe producirse por que el candidato supera las distintas fases de forma automàtica o como consecuencia que el reclutador valide el paso a la siguiente fase
+Dadas las historias de usuario presentes en @[LTI-ABB/UserStories-ABB.md] , qué requisitos técnicos se necesitarían? reflejarlo como un apartado adicional a continuación en el documento
 
 ### Response
-Corregida la User Story 4. Ahora especifica que los candidatos avanzan de estado cuando:
-- El reclutador valida el paso a la siguiente fase
-- El candidato supera automáticamente una fase (ej: completa prueba técnica en tiempo)
+Agregado el apartado de requisitos técnicos al documento con:
 
-También actualicé la verificación INVEST para reflejar que incluye lógica de transiciones automáticas además de la interfaz visual.
+- **Arquitectura General**: Backend (API RESTful/GraphQL), Frontend (SPA framework), Base de datos (relacional)
+- **Requisitos por User Story**: Detalles técnicos específicos para cada una de las 10 stories (integraciones, APIs, tablas de BD, validaciones)
+- **Requisitos Transversales**: Seguridad, Performance, Escalabilidad, Monitoring, DevOps y Testing
+
+---
+
+## Prompt - 2026-05-30 11:18:11
+
+### Prompt
+Analiza las funcionalidades existentes del sistema para identificar los cinco problemas más comunes que tanto los reclutadores como candidatos podrían enfrentar. Sugerir mejoras
+
+### Response
+Agregado el apartado de análisis de problemas y mejoras al documento con 5 problemas identificados:
+
+1. **Barrera de entrada alta para candidatos** (US2) - Perfil 100% completo antes de postular
+2. **Falta de feedback en pruebas técnicas** (US5) - Sin feedback detallado al candidato
+3. **Ausencia de colaboración entre reclutadores** (US4) - Sin comentarios, etiquetas o asignación
+4. **Limitaciones en formatos de archivos** (US3) - Solo PDF/Word, 10MB
+5. **Falta de videoconferencia integrada** (US6) - Sin plataforma nativa para entrevistas
+
+Cada problema incluye descripción, impacto y mejoras propuestas específicas. Incluí tabla de priorización de mejoras.
 
 ---

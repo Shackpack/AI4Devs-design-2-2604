@@ -244,3 +244,265 @@
 | US8: Publicación Multi-canal | Media | 4-5 | US1 |
 | US9: Notificaciones Automáticas | Media | 2-3 | US4 |
 | US10: Reportes y Analytics | Baja | 4-5 | US4, US6 |
+
+---
+
+## Requisitos Técnicos
+
+### Arquitectura General
+
+**Backend:**
+- API RESTful o GraphQL para comunicación cliente-servidor
+- Arquitectura modular por dominios (ofertas, candidatos, pipeline, pruebas, entrevistas)
+- Sistema de autenticación y autorización basado en roles (RBAC)
+- Middleware para validación de datos, sanitización de inputs y manejo de errores
+- Sistema de logging estructurado para auditoría y debugging
+
+**Frontend:**
+- Framework SPA (React/Vue/Angular) para interfaz interactiva
+- Componentes reutilizables para formularios, tablas y visualizaciones
+- State management para manejo de estado global
+- Responsive design para soporte multi-dispositivo
+- Sistema de routing para navegación SPA
+
+**Base de Datos:**
+- Base de datos relacional (PostgreSQL/MySQL) para datos estructurados
+- Tablas principales: usuarios, empresas, ofertas, candidaturas, pruebas, entrevistas, notificaciones
+- Índices optimizados para búsquedas frecuentes (email, estado de candidatura, habilidades)
+- Relaciones con integridad referencial
+- Migraciones versionadas para gestión de schema
+
+---
+
+### Requisitos por User Story
+
+#### US1 - Creación de Ofertas de Empleo
+- **Backend:** CRUD API para ofertas con validación de campos
+- **Frontend:** Formulario dinámico con validación en tiempo real
+- **Base de datos:** Tabla `ofertas` con campos: id, titulo, descripcion, requisitos, salario, ubicacion, estado, empresa_id
+- **Validaciones:** Sanitización de HTML en descripción, validación de formato de salario
+
+#### US2 - Registro y Perfil de Candidato
+- **Autenticación:** Sistema de autenticación con JWT y 2FA (TOTP/SMS)
+- **Backend:** CRUD API para usuarios con validación de email (RFC 5322)
+- **Frontend:** Formulario de registro multi-paso con validación progresiva
+- **Base de datos:** Tabla `usuarios` con campos: id, email, password_hash, nombre, telefono, rol, mfa_enabled, mfa_secret
+- **Seguridad:** Hash de contraseñas (bcrypt/argon2), encriptación de datos sensibles
+
+#### US3 - Postulación a Ofertas
+- **Almacenamiento de archivos:** Servicio de almacenamiento (AWS S3/Cloud Storage) para CVs y cartas
+- **Antivirus:** Integración con servicio de escaneo antivirus (ClamAV/Cloud-based)
+- **Backend:** API para carga de archivos con validación de formato (PDF/Word) y tamaño (máx 10MB)
+- **Base de datos:** Tabla `candidaturas` con campos: id, usuario_id, oferta_id, fecha_postulacion, estado, cv_url, carta_url
+- **Validaciones:** Verificación de duplicados, estado de oferta activa
+
+#### US4 - Pipeline Visual de Candidatos
+- **Frontend:** Componente Kanban con drag-and-drop (React DnD/similar)
+- **Backend:** API para transiciones de estado con lógica de validación
+- **Tiempo real:** WebSocket (Socket.io/SignalR) para actualizaciones en vivo del pipeline
+- **Base de datos:** Tabla `candidaturas` con campo `estado` y tabla `auditoria_candidaturas` para tracking de cambios
+- **Lógica de negocio:** Reglas de transición automática (ej: completar prueba → avanzar estado)
+- **Auditoría:** Registro de todos los cambios con timestamp y usuario_id
+
+#### US5 - Asignación de Pruebas Técnicas
+- **Backend:** Sistema de gestión de pruebas con biblioteca de tests
+- **Timer:** Sistema de límites de tiempo configurables por empresa
+- **Frontend:** Interfaz para crear/seleccionar pruebas y ver resultados
+- **Base de datos:** Tablas: `pruebas` (id, titulo, tipo, contenido, tiempo_limite), `asignaciones_pruebas` (id, prueba_id, candidatura_id, fecha_asignacion, fecha_completacion, resultado)
+- **Notificaciones:** Sistema de eventos para notificar al candidato
+
+#### US6 - Programación de Entrevistas
+- **Integraciones:** APIs de Google Calendar (Calendar API) y Microsoft Outlook (Graph API)
+- **Backend:** Servicio de sincronización con calendarios externos
+- **Frontend:** Date picker con validación de fechas (no pasado, máx 6 meses futuro)
+- **Base de datos:** Tabla `entrevistas` con campos: id, candidatura_id, fecha, hora, feedback, calendario_externo_id
+- **Validaciones:** Conflicto de horarios, disponibilidad del reclutador
+
+#### US7 - Búsqueda y Filtrado de Candidatos
+- **Motor de búsqueda:** Elasticsearch o full-text search en PostgreSQL para búsqueda por texto libre
+- **Backend:** API de búsqueda con filtros compuestos y paginación
+- **Frontend:** Componente de búsqueda con filtros dinámicos y guardado de filtros
+- **Base de datos:** Índices optimizados en campos: habilidades, experiencia, ubicacion, educacion
+- **Exportación:** Servicio de generación de CSV
+- **Tags:** Sistema de etiquetas para habilidades
+
+#### US8 - Publicación Multi-canal de Ofertas
+- **Integraciones:** APIs de LinkedIn (Share API), Twitter (X API), Facebook (Graph API), portales de empleo
+- **Backend:** Sistema de colas (RabbitMQ/Redis) para publicaciones asíncronas
+- **Frontend:** Interfaz para seleccionar canales y ver estado de publicación
+- **Base de datos:** Tabla `publicaciones` con campos: id, oferta_id, canal, estado, fecha_publicacion, error_message
+- **Retry:** Mecanismo de reintentos automáticos para publicaciones fallidas
+- **Webhooks:** Recepción de confirmaciones de plataformas externas
+
+#### US9 - Notificaciones Automáticas
+- **Email:** Servicio de envío de emails (SendGrid/Mailgun/AWS SES) con templates
+- **Push:** Servicio de notificaciones push (Firebase Cloud Messaging/OneSignal) - opcional
+- **Backend:** Sistema de eventos/trigger para detectar cambios de estado en pipeline
+- **Colas:** Sistema de colas para envío asíncrono de notificaciones
+- **Base de datos:** Tabla `notificaciones` con campos: id, usuario_id, tipo, contenido, fecha_envio, estado, preferencias
+- **Plantillas:** Sistema de templates de email personalizados por estado
+
+#### US10 - Reportes y Analytics
+- **Dashboard:** Framework de visualización (Chart.js/D3.js/Recharts)
+- **Backend:** API de analytics con queries agregadas y filtros temporales
+- **Base de datos:** Vistas materializadas o queries optimizadas para métricas
+- **Exportación:** Servicios de generación de PDF (Puppeteer/jsPDF) y CSV
+- **Caching:** Sistema de cache (Redis) para métricas frecuentes
+- **Métricas:** Cálculo de KPIs: tiempo promedio contratación, tasa conversión, fuentes efectivas
+
+---
+
+### Requisitos Transversales
+
+**Seguridad:**
+- HTTPS/TLS 1.3 para todas las comunicaciones
+- CORS configurado para dominios autorizados
+- Rate limiting para prevenir abuso
+- Sanitización de inputs para prevenir XSS/SQL injection
+- Headers de seguridad (CSP, X-Frame-Options, etc.)
+- Cumplimiento RGPD: consentimiento explícito, derecho al olvido, portabilidad de datos
+
+**Performance:**
+- CDN para assets estáticos
+- Compresión de respuestas (gzip/brotli)
+- Optimización de imágenes y archivos
+- Lazy loading de componentes
+- Paginación en listados grandes
+- Cache de respuestas frecuentes
+
+**Escalabilidad:**
+- Arquitectura stateless para horizontal scaling
+- Balanceador de carga (Nginx/HAProxy/ALB)
+- Base de datos con replicación read-only para consultas
+- Sistema de colas para tareas asíncronas
+- Microservicios opcionales para componentes independientes
+
+**Monitoring y Logging:**
+- Sistema de logging centralizado (ELK stack/Grafana Loki)
+- Monitoring de aplicación (APM: New Relic/DataDog)
+- Alertas automáticas para errores críticos
+- Health checks para servicios
+- Métricas de performance y uso
+
+**DevOps:**
+- CI/CD pipeline (GitHub Actions/GitLab CI)
+- Contenedorización (Docker)
+- Orquestación (Kubernetes/Docker Compose)
+- Gestión de configuración (Environment variables/Secrets manager)
+- Blue-green deployments para actualizaciones sin downtime
+
+**Testing:**
+- Unit tests para lógica de negocio
+- Integration tests para APIs
+- E2E tests para flujos críticos
+- Tests de carga para componentes críticos
+- Tests de seguridad automatizados
+
+---
+
+## Análisis de Problemas Comunes y Mejoras Propuestas
+
+### Problema 1: Barrera de Entrada Alta para Candidatos (US2)
+
+**Descripción:**
+El requisito de que el perfil esté 100% completo antes de poder postularse crea una barrera significativa. Los candidatos deben invertir tiempo considerable completando información detallada antes de saber si hay ofertas relevantes para ellos.
+
+**Impacto:**
+- Alta tasa de abandono durante el registro
+- Pérdida de candidatos cualificados que no quieren completar formularios largos
+- Experiencia de usuario frustrante
+
+**Mejoras Propuestas:**
+- **Registro progresivo:** Permitir postulación con perfil básico (nombre, email, CV) y completar el resto después
+- **Importación de LinkedIn:** Permitir importar perfil automáticamente desde LinkedIn para reducir fricción
+- **Perfil por etapas:** Indicar porcentaje de completitud y permitir postulación con perfil mínimo (ej: 60%)
+- **Campos opcionales estratégicos:** Marcar campos como "recomendados" en lugar de obligatorios
+
+---
+
+### Problema 2: Falta de Feedback Estructurado en Pruebas Técnicas (US5)
+
+**Descripción:**
+El sistema asigna pruebas técnicas y registra resultados, pero no proporciona feedback detallado al candidato sobre qué acertó/erró ni áreas de mejora.
+
+**Impacto:**
+- Los candidatos no aprenden de sus errores
+- Experiencia negativa que puede dañar el employer branding
+- Los reclutadores no tienen justificación clara para rechazos basados en pruebas
+
+**Mejoras Propuestas:**
+- **Feedback automático:** Generar reporte detallado con aciertos/errores por categoría de habilidad
+- **Recomendaciones de mejora:** Sugerir recursos o cursos basados en áreas débiles
+- **Comparación con otros:** Mostrar percentil de desempeño vs otros candidatos (anonimizado)
+- **Reintentos limitados:** Permitir repetir prueba después de X días con nuevas preguntas
+
+---
+
+### Problema 3: Ausencia de Colaboración entre Reclutadores (US4)
+
+**Descripción:**
+El pipeline visual permite seguimiento individual pero no hay sistema de comentarios, etiquetas o asignación de candidatos entre múltiples reclutadores del mismo equipo.
+
+**Impacto:**
+- Dificultad para coordinar decisiones en equipo
+- Pérdida de contexto cuando múltiples reclutadores revisan al mismo candidato
+- No hay historial de opiniones colaborativas
+
+**Mejoras Propuestas:**
+- **Comentarios en candidatos:** Sistema de comentarios @mención entre reclutadores en cada candidatura
+- **Etiquetas personalizadas:** Permitir etiquetar candidatos (ej: "prioridad alta", "referencia interna", "backup")
+- **Asignación de propietario:** Designar reclutador responsable de cada candidatura
+- **Vista de equipo:** Panel colaborativo para ver candidatos asignados a cada reclutador
+- **Voting system:** Sistema de votación para decisiones de avance/rechazo en equipo
+
+---
+
+### Problema 4: Limitaciones en Formatos y Tamaño de Archivos (US3)
+
+**Descripción:**
+El sistema solo acepta PDF/Word con límite de 10MB, lo que excluye candidatos con CVs en otros formatos o con portfolios multimedia (diseñadores, desarrolladores con GitHub, etc.).
+
+**Impacto:**
+- Candidatos creativos/tecnológicos no pueden mostrar su trabajo completo
+- Rechazo automático de postulaciones válidas por formato
+- Pérdida de talento especializado
+
+**Mejoras Propuestas:**
+- **Soporte multi-formato:** Aceptar también: imágenes (JPG/PNG para portfolios), enlaces a GitHub/Behance/Dribbble, videos (YouTube/Vimeo)
+- **Límite flexible:** Aumentar límite a 25MB o usar compresión automática
+- **Vista previa:** Generar preview de CVs y portfolios directamente en el sistema
+- **Parser inteligente:** Extraer información automáticamente de CVs en diferentes formatos
+- **Enlaces externos:** Permitir adjuntar enlaces a portfolios online en lugar de solo archivos
+
+---
+
+### Problema 5: Falta de Sistema de Videoconferencia Integrado (US6)
+
+**Descripción:**
+La programación de entrevistas se integra con calendarios externos pero no incluye plataforma de videoconferencia, obligando a usar herramientas externas (Zoom, Teams, Meet) manualmente.
+
+**Impacto:**
+- Fricción adicional para coordinar enlaces de videollamada
+- Riesgo de errores en la coordinación de enlaces
+- Experiencia menos profesional y fluida
+- No hay grabación automática de entrevistas para revisión posterior
+
+**Mejoras Propuestas:**
+- **Integración nativa de video:** Integrar API de Zoom/Teams/Meet para generar enlaces automáticamente
+- **Sala de espera:** Virtual waiting room para candidatos antes de la entrevista
+- **Grabación automática:** Opción de grabar entrevistas con consentimiento para revisión posterior
+- **Evaluación en vivo:** Formulario de feedback accesible durante la videollamada
+- **Transcripción automática:** Generar transcripción de la entrevista para búsqueda posterior
+- **Calendario unificado:** Mostrar disponibilidad de todos los entrevistadores en una sola vista
+
+---
+
+## Resumen de Prioridad de Mejoras
+
+| Mejora | Prioridad | Complejidad | Impacto en UX | User Story Relacionada |
+|--------|-----------|-------------|---------------|------------------------|
+| Registro progresivo | Alta | Media | Muy alto | US2 |
+| Feedback en pruebas técnicas | Alta | Media | Alto | US5 |
+| Colaboración entre reclutadores | Media | Alta | Alto | US4 |
+| Soporte multi-formato archivos | Media | Baja | Medio | US3 |
+| Videoconferencia integrada | Alta | Alta | Muy alto | US6 |
